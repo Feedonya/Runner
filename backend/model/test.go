@@ -14,9 +14,9 @@ type Test struct {
 }
 
 type TestResult struct {
-	TaskID     string `json:"task_id"`
-	TestID     int    `json:"test_id"`
-	Successful bool   `json:"successful"`
+	TestNumber int  `json:"test_number"` // or similar
+	Passed     bool `json:"passed"`      // or similar
+	// Other fields...
 }
 
 func ParseTestsJSON(data []byte) ([]TestDTO, error) {
