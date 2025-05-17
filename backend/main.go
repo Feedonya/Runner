@@ -13,6 +13,7 @@ import (
 	"github.com/Feedonya/Runner/backend/model"
 	"github.com/gorilla/mux"
 	"github.com/redis/go-redis/v9"
+	"github.com/rs/cors"
 
 	"github.com/minio/minio-go/v7"
 	"github.com/minio/minio-go/v7/pkg/credentials"
@@ -85,13 +86,22 @@ func main() {
 	router.HandleFunc("/api/tasks/{id}", taskHandler.GetTask).Methods("GET")
 	router.HandleFunc("/api/tasks", taskHandler.ListTasks).Methods("GET")
 
+	// Add CORS middleware
+	c := cors.New(cors.Options{
+		AllowedOrigins:   []string{"http://localhost", "http://127.0.0.1"},
+		AllowedMethods:   []string{"GET", "POST", "OPTIONS"},
+		AllowedHeaders:   []string{"Content-Type"},
+		AllowCredentials: true,
+	})
+	handler := c.Handler(router)
+
 	// Start server
 	port := os.Getenv("SERVER_PORT")
 	if port == "" {
 		port = "8080"
 	}
 	log.Printf("Starting server on port %s", port)
-	if err := http.ListenAndServe(":"+port, router); err != nil {
+	if err := http.ListenAndServe(":"+port, handler); err != nil {
 		log.Fatalf("Server failed: %v", err)
 	}
 }

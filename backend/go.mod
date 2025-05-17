@@ -7,6 +7,7 @@ require (
 	github.com/gorilla/mux v1.8.1
 	github.com/minio/minio-go/v7 v7.0.76
 	github.com/redis/go-redis/v9 v9.6.1
+	github.com/rs/cors v1.11.1
 )
 
 require (
