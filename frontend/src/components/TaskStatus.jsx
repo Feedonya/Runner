@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
-function TaskStatus({ taskId }) {
-  const [task, setTask] = useState(null);
+const TaskStatus = ({ taskId }) => {
+  const [status, setStatus] = useState(null);
   const [error, setError] = useState('');
 
   useEffect(() => {

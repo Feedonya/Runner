@@ -41,15 +41,15 @@ const TaskForm = ({ setShowStatus, setCurrentTaskId }) => {
     formData.append('code', codeFile);
 
     try {
-      const response = await fetch('http://localhost:8080/api/tasks', {
+      const response = await fetch('/api/tasks', {
         method: 'POST',
         body: formData,
       });
       if (!response.ok) throw new Error('Failed to submit');
       const data = await response.json();
       console.log('Response:', data);
-      setCurrentTaskId(data.task_id); // Update local state
-      setShowStatus(true); // Notify parent to show status
+      setCurrentTaskId(data.task_id);
+      setShowStatus(true);
     } catch (err) {
       setError(err.message);
       console.error('Fetch error:', err);
