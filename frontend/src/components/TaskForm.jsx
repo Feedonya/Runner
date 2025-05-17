@@ -16,7 +16,7 @@ const TaskForm = ({ setShowStatus, setCurrentTaskId }) => {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/api/tasks', {
+      const response = await fetch('/api/tasks', {
         method: 'POST',
         body: formData,
       });
@@ -86,6 +86,7 @@ const TaskForm = ({ setShowStatus, setCurrentTaskId }) => {
           <label className="block text-sm font-medium text-gray-700">Code File</label>
           <input
             type="file"
+            accept=".cpp" // Restrict to .cpp files
             onChange={(e) => setCodeFile(e.target.files[0])}
             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
           />
