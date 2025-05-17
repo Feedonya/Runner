@@ -1,50 +1,44 @@
 import React, { useState, useEffect } from 'react';
 
-function TaskStatus({ taskId }) {
-  const [task, setTask] = useState(null);
+const TaskStatus = ({ taskId }) => {
+  const [status, setStatus] = useState(null);
   const [error, setError] = useState('');
 
   useEffect(() => {
-    const pollTask = async () => {
+    const fetchStatus = async () => {
       try {
-        const response = await fetch(`http://backend:8080/api/tasks/${taskId}`);
-        if (!response.ok) {
-          throw new Error('Failed to fetch task status');
-        }
+        const response = await fetch(`/api/tasks/${taskId}`);
+        if (!response.ok) throw new Error('Failed to fetch status');
         const data = await response.json();
-        setTask(data);
+        setStatus(data);
+        setError('');
       } catch (err) {
-        setError(err.message);
+        console.error('Fetch error:', err);
+        // Only set error if the task is completed and still failing
+        if (status && status.state === 'completed') {
+          setError('Failed to fetch status');
+        }
       }
     };
 
-    pollTask();
-    const interval = setInterval(pollTask, 2000);
+    fetchStatus();
+    const interval = setInterval(fetchStatus, 2000);
     return () => clearInterval(interval);
   }, [taskId]);
 
-  if (error) {
-    return <p className="text-red-500">{error}</p>;
-  }
-
-  if (!task) {
-    return <p className="text-gray-500">Loading task status...</p>;
-  }
-
-  const passedTests = task.testsResults ? task.testsResults.filter(r => r.successful).length : 0;
-  const totalTests = task.testsResults ? task.testsResults.length : 0;
+  if (!status) return null;
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold mb-4">Task Status: {taskId}</h2>
-      <p><strong>State:</strong> {task.state}</p>
-      {task.testsResults && (
-        <p>
-          <strong>Tests Passed:</strong> {passedTests} / {totalTests}
-        </p>
+    <div className="mt-6 p-4 bg-gray-100 rounded-lg">
+      <h2 className="text-xl font-bold mb-4">Task Status</h2>
+      {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+      <p>Task ID: {status.id}</p>
+      <p>State: {status.state}</p>
+      {status.state === 'completed' && status.testsResults && (
+        <p>Tests Passed: {status.testsResults.filter(r => r.successful).length} / {status.testsResults.length}</p>
       )}
     </div>
   );
-}
+};
 
 export default TaskStatus;

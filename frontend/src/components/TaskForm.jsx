@@ -15,23 +15,6 @@ const TaskForm = ({ setShowStatus, setCurrentTaskId }) => {
       return;
     }
 
-    try {
-      const response = await fetch('http://localhost:8080/api/tasks', {
-        method: 'POST',
-        body: formData,
-      });
-      if (!response.ok) throw new Error('Failed to submit');
-      const data = await response.json();
-      console.log('Response:', data);
-      setCurrentTaskId(data.task_id); // Use the prop instead of local setTaskId
-      setShowStatus(true);
-    } catch (err) {
-      setError(err.message);
-      console.error('Fetch error:', err);
-    } finally {
-      setSubmitting(false);
-    }
-
     setError('');
     setSubmitting(true);
 
@@ -41,15 +24,15 @@ const TaskForm = ({ setShowStatus, setCurrentTaskId }) => {
     formData.append('code', codeFile);
 
     try {
-      const response = await fetch('http://localhost:8080/api/tasks', {
+      const response = await fetch('/api/tasks', {
         method: 'POST',
         body: formData,
       });
       if (!response.ok) throw new Error('Failed to submit');
       const data = await response.json();
       console.log('Response:', data);
-      setCurrentTaskId(data.task_id); // Update local state
-      setShowStatus(true); // Notify parent to show status
+      setCurrentTaskId(data.task_id);
+      setShowStatus(true);
     } catch (err) {
       setError(err.message);
       console.error('Fetch error:', err);
@@ -86,6 +69,7 @@ const TaskForm = ({ setShowStatus, setCurrentTaskId }) => {
           <label className="block text-sm font-medium text-gray-700">Code File</label>
           <input
             type="file"
+            accept=".cpp" // Restrict to .cpp files
             onChange={(e) => setCodeFile(e.target.files[0])}
             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
           />

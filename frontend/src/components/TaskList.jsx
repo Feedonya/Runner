@@ -7,17 +7,16 @@ function TaskList() {
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch('http://backend:8080/api/tasks');
-        if (!response.ok) {
-          throw new Error('Failed to fetch tasks');
-        }
+        const response = await fetch('/api/tasks');
+        if (!response.ok) throw new Error('Failed to fetch tasks');
         const data = await response.json();
         setTasks(data);
+        setError('');
       } catch (err) {
-        setError(err.message);
+        console.error('Fetch error:', err);
+        setTimeout(fetchTasks, 2000);
       }
     };
-
     fetchTasks();
   }, []);
 
@@ -26,29 +25,18 @@ function TaskList() {
   }
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold mb-4">Submitted Tasks</h2>
-      {tasks.length === 0 ? (
-        <p className="text-gray-500">No tasks submitted yet.</p>
-      ) : (
-        <ul className="space-y-2">
-          {tasks.map(task => {
-            const passedTests = task.testsResults ? task.testsResults.filter(r => r.successful).length : 0;
-            const totalTests = task.testsResults ? task.testsResults.length : 0;
-            return (
-              <li key={task.id} className="border-b py-2">
-                <p><strong>Task ID:</strong> {task.id}</p>
-                <p><strong>State:</strong> {task.state}</p>
-                {task.testsResults && (
-                  <p><strong>Tests Passed:</strong> {passedTests} / {totalTests}</p>
-                )}
-              </li>
-            );
-          })}
-        </ul>
-      )}
+    <div className="mt-6">
+      <h2 className="text-xl font-bold mb-4">Submitted Tasks</h2>
+      {error && <p className="text-red-500 text-sm mb-4">{error}</p>}
+      <ul>
+        {tasks.map((task) => (
+          <li key={task.id} className="mb-2">
+            {task.id} - {task.state}
+          </li>
+        ))}
+      </ul>
     </div>
   );
-}
+};
 
 export default TaskList;
