@@ -1,0 +1,10 @@
+\babel@toc {russian}{}\relax 
+\contentsline {section}{\cyrillictext \CYRV \CYRV \CYRE \CYRD \CYRE \CYRN \CYRI \CYRE }{4}{section*.1}%
+\contentsline {section}{\numberline {1}\IeC {\CYRR }\IeC {\cyre }\IeC {\cyrf }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyra }\IeC {\cyrt } \IeC {\cyrp }\IeC {\cyro } \IeC {\cyrt }\IeC {\cyre }\IeC {\cyrm }\IeC {\cyre } <<\IeC {\CYRT }\IeC {\cyre }\IeC {\cyrm }\IeC {\cyra } \IeC {\cyrr }\IeC {\cyre }\IeC {\cyrf }\IeC {\cyre }\IeC {\cyrr }\IeC {\cyra }\IeC {\cyrt }\IeC {\cyra }>>}{5}{section.1}%
+\contentsline {section}{\cyrillictext \CYRZ \CYRA \CYRK \CYRL \CYRYU \CYRCH \CYRE \CYRN \CYRI \CYRE }{6}{section*.2}%
+\contentsline {section}{\cyrillictext \CYRS \CYRP \CYRI \CYRS \CYRO \CYRK \ \CYRI \CYRS \CYRP \CYRO \CYRL \CYRSFTSN \CYRZ \CYRO \CYRV \CYRA \CYRN \CYRN \CYRERY \CYRH \ \CYRI \CYRS \CYRT \CYRO \CYRCH \CYRN \CYRI \CYRK \CYRO \CYRV }{7}{section*.3}%
+\redeflsection 
+\ttl@change@i {\@ne }{section}{3ex}{\hspace {-3ex}}{\appendixname ~\thecontentslabel \hspace {2ex}}{\hspace {2.3em}}{\titlerule *[0.98ex]{.}\contentspage }\relax 
+\ttl@change@v {section}{}{}{}\relax 
+\contentsline {section}{\numberline {\CYRA }\IeC {\CYRI }\IeC {\cyrs }\IeC {\cyrh }\IeC {\cyro }\IeC {\cyrd }\IeC {\cyrn }\IeC {\cyrery }\IeC {\cyrishrt } \IeC {\cyrk }\IeC {\cyro }\IeC {\cyrd } \IeC {\cyrd }\IeC {\cyro }\IeC {\cyrk }\IeC {\cyru }\IeC {\cyrm }\IeC {\cyre }\IeC {\cyrn }\IeC {\cyrt }\IeC {\cyra }}{8}{appendix.A}%
+\contentsfinish 
